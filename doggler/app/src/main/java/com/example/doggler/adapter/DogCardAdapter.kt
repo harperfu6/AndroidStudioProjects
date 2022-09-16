@@ -7,10 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doggler.R
+import com.example.doggler.const.Layout
 import com.example.doggler.model.Dog
 
 class DogCardAdapter(
-    private val dataset: List<Dog>
+    private val dataset: List<Dog>,
+    private val layout: Int,
 ): RecyclerView.Adapter<DogCardAdapter.DogCardViewHolder>() {
 
     class DogCardViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -22,7 +24,12 @@ class DogCardAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogCardViewHolder {
         // create a new view
-        val adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.vertical_horizontal_list_item, parent, false)
+        var adapterLayout: View
+        if (layout == Layout.GRID) {
+            adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.grid_list_item, parent, false)
+        } else {
+            adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.vertical_horizontal_list_item, parent, false)
+        }
         return DogCardViewHolder(adapterLayout)
     }
 
