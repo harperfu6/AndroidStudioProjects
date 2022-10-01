@@ -35,11 +35,17 @@ class FlavorFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             nextButton.setOnClickListener { goToNextScreen() }
             viewModel = sharedViewModel
+            flavorFragment = this@FlavorFragment
         }
     }
 
     fun goToNextScreen() {
         findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
+    }
+
+    fun cancelOrder() {
+        sharedViewModel.resetOrder()
+        findNavController().navigate(R.id.action_flavorFragment_to_startFragment)
     }
 
     override fun onDestroyView() {
